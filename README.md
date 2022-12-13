@@ -17,7 +17,11 @@ This project creates a README.md file from questions that are asked in the termi
 
 ## Installation
 
-npm...something
+To install necessary dependencies, run the following command:
+
+```csharp-interactive
+npm install
+```
 
 ## Usage
 
@@ -29,16 +33,16 @@ Just run node index.js to get it to ask questions.
   
 ## Contributing
 
-Contact me.  No cursing...etc.
+Contributions are welcome. Please contact me by email.
 
 ## Tests
 
-I don't know.
+Tests are not available at this time.
 
 ## Questions
 
-by: lesley-byte
+Created by: lesley-byte
 
-[GitHub](https://github.com/lesley-byte)
+My Github profile is at : [GitHub](https://github.com/lesley-byte)
 
-[Email](mailto:phosphorescence3@hotmail.com)
+Feel free to contact me by email with any questions: [Email](mailto:phosphorescence3@hotmail.com)
