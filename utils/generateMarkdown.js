@@ -73,11 +73,11 @@ ${tests}
 
 ## Questions
 
-by: ${username}
+Project created by: ${username}.
+Feel free to contact me by email with any questions: [Email](mailto:${email})
 
-[GitHub](https://github.com/${username})
+My Github profile is at: [GitHub](https://github.com/${username})`;
 
-[Email](mailto:${email})`;
 }
 
 module.exports = {
