@@ -1,80 +1,61 @@
-// TODO: Include packages needed for this application
-const inquirer = require('inquirer');
-const fs = require('fs');
-// include js file in utils folder
-const generateMarkdown = require("./utils/generateMarkdown");
-// TODO: Create an array of questions for user input for Project Title, Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-const questions = () => {
-    return inquirer.prompt([
-    {
-        type: "input",
-        message: "What is the name of your project?",
-        name: "projectName"
-    },
-    {
-        type: "input",
-        message: "Please write a short description of your project:",
-        name: "description"
-    },
-    {
-        type: "input",
-        message: "What are the steps required to install your project?",
-        name: "installation"
-    },
-    {
-        type: "input",
-        message: "Provide instructions and examples for use.",
-        name: "usage"
-    },
-    {
-        type: "checkbox",
-        message: "What kind of license should your project have?",
-        name: "license",
-        choices: [
-            "MIT",
-            "Apache",
-            "GPL",
-            "BSD",
-            "None"
-        ]
-    },
-    {
-        type: "input",
-        message: "What does the user need to know about contributing to the repo?",
-        name: "contributing"
-    },
-    {
-        type: "input",
-        message: "What command should be run to run tests?",
-        name: "tests"
-    },
-    {
-        type: "input",
-        message: "What is your GitHub username?",
-        name: "username"
-    },
-    {
-        type: "input",
-        message: "What is your email address?",
-        name: "email"
-    }
-    ]);
-};
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, function(err) {
-        if (err) {
-            console.error(err);
-            return ;
-        }
-        console.log("Success!");
-    });
-}
-// TODO: Create a function to initialize app
-function init() {
-    questions()
-    .then((data) => writeToFile("README.md", generateMarkdown.generateMarkdown(data)))
+import fs from "fs";
+import path from "path";
+import inquirer from "inquirer";
+import questions from "./utils/questions.js";
+import generateMarkdown from "./utils/generateMarkdown.js";
+import chalk from "chalk";
 
-}
-// Function call to initialize app
+/**
+ * Displays a welcome message in the terminal.
+ */
+const displayWelcomeMessage = () => {
+  console.clear();
+  console.log(
+    chalk.blueBright(`
+  ===================================================
+              Welcome to the README Generator!
+  ===================================================
+  Quickly create a professional README file 
+  for your project by answering a few questions.
+  Let's get started!
+  `)
+  );
+};
+
+/**
+ * Writes data to a specified file.
+ * @param {string} fileName - The name of the file to write.
+ * @param {string} data - The content to write to the file.
+ */
+const writeToFile = async (fileName, data) => {
+  const filePath = path.join(process.cwd(), fileName);
+  try {
+    console.log(chalk.yellow("🔄 Writing your README file..."));
+    await fs.promises.writeFile(filePath, data);
+    console.log(chalk.green(`✅ README.md has been generated at ${filePath}`));
+  } catch (err) {
+    console.error(chalk.red("❌ Error writing file:", err));
+  }
+};
+
+/**
+ * Initializes the application by prompting the user and generating a README.
+ */
+const init = async () => {
+  try {
+    displayWelcomeMessage();
+    const responses = await inquirer.prompt(questions);
+    console.log(chalk.cyan("🔄 Generating your README content..."));
+    const markdownContent = generateMarkdown(responses);
+    const fileName = `${responses.title
+      .toLowerCase()
+      .split(" ")
+      .join("-")}-README.md`;
+    await writeToFile(fileName, markdownContent);
+  } catch (err) {
+    console.error(chalk.red("❌ Error during initialization:", err));
+  }
+};
+
+// Start the application
 init();
