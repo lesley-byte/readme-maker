@@ -6,6 +6,10 @@
 
 The **Readme Maker** is a command-line application designed to streamline the process of creating professional and high-quality README files for your projects. By answering a series of prompts in the terminal, you can generate a fully formatted README.md file tailored to your project’s needs in seconds. This tool is ideal for developers who want to save time and focus on their code rather than documentation formatting.
 
+## Screenshot
+
+![Readme Maker Demo](/assets/images/image.png)
+
 ## Table of Contents
 
 - [Installation](#installation)
